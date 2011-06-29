@@ -1,0 +1,58 @@
+---------- workbench application ----------
+---------- application starting ----------
+plugin envisage.core starting
+loading preferences from <C:\Users\jrocher\AppData\Roaming\Enthought\practice.envisage.myide\preferences.ini>
+extensions to <envisage.preferences> <[[], ['pkgfile://envisage.ui.workbench/preferences.ini'], [], [], []]>
+loading preferences from <<open file 'c:\users\jrocher\projects\ets_trunk\envisage\envisage\ui\workbench\preferences.ini', mode 'rb' at 0x05590650>>
+extensions to <envisage.class_load_hooks> <[[], [], [], [], []]>
+extensions to <envisage.categories> <[[], [], [], [], []]>
+extensions to <envisage.service_offers> <[[], [<envisage.service_offer.ServiceOffer object at 0x05589B40>, <envisage.service_offer.ServiceOffer object at 0x054C9720>], [], [], []]>
+service <1> registered apptools.preferences.ui.preferences_manager.PreferencesManager
+service <2> registered envisage.ui.workbench.workbench.Workbench
+plugin envisage.core started
+plugin envisage.ui.workbench starting
+plugin envisage.ui.workbench started
+plugin <envisage.plugins.text_editor.text_editor_plugin.TextEditorPlugin object at 0x0556FD20> has no Id - using <envisage.plugins.text_editor.text_editor_plugin.TextEditorPlugin>
+plugin envisage.plugins.text_editor.text_editor_plugin.TextEditorPlugin starting
+plugin envisage.plugins.text_editor.text_editor_plugin.TextEditorPlugin started
+plugin envisage.plugins.python_shell starting
+plugin envisage.plugins.python_shell started
+plugin practice.envisage.myide.perspective_plugin starting
+plugin practice.envisage.myide.perspective_plugin started
+---------- application started ----------
+workbench factory <class 'envisage.ui.workbench.workbench.Workbench'>
+extensions to <envisage.ui.workbench.perspectives> <[[], [], [], [], [<class '__main__.MyIDEPerspective'>]]>
+workbench state location is C:\Users\jrocher\AppData\Roaming\Enthought\practice.envisage.myide\pyface\workbench\wx
+window <envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x055CDED0> opening
+extensions to <envisage.ui.workbench.service_offers> <[[], [], [], [], []]>
+active perspective changed from <None> to <Perspective(std overview IDE)>
+extensions to <envisage.ui.workbench.views> <[[], [], [], [<class 'envisage.plugins.ipython_shell.view.ipython_shell_view.IPythonShellView'>, <class 'envisage.plugins.ipython_shell.view.namespace_view.NamespaceView'>], []]>
+extensions to <envisage.plugins.ipython_shell.banner> <[[], [], [], [], []]>
+extensions to <envisage.plugins.python_shell.bindings> <[[], [], [], [{'application': <envisage.ui.workbench.workbench_application.WorkbenchApplication object at 0x0556FDB0>}], []]>
+extensions to <envisage.plugins.python_shell.commands> <[[], [], [], [], []]>
+service <3> registered envisage.plugins.python_shell.i_python_shell.IPythonShell
+active view changed from <None> to <<envisage.plugins.ipython_shell.view.ipython_shell_view.IPythonShellView object at 0x05C55810>>
+active part changed from <None> to <<envisage.plugins.ipython_shell.view.ipython_shell_view.IPythonShellView object at 0x05C55810>>
+extensions to <envisage.ui.workbench.action_sets> <[[], [<class 'envisage.ui.workbench.default_action_set.DefaultActionSet'>], [<class 'envisage.plugins.text_editor.text_editor_action_set.TextEditorActionSet'>], [<class 'envisage.plugins.ipython_shell.actions.ipython_shell_actions.IPythonShellActionSet'>], []]>
+refreshing view menu
+window <envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x055CDED0> activated
+window <envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x055CDED0> opened
+---------- starting GUI event loop ----------
+window <envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x055CDED0> closing
+window <envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x055CDED0> activated
+window <envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x055CDED0> closed
+---------- application stopping ----------
+plugin practice.envisage.myide.perspective_plugin stopping
+plugin practice.envisage.myide.perspective_plugin stopped
+plugin envisage.plugins.python_shell stopping
+plugin envisage.plugins.python_shell stopped
+plugin envisage.plugins.text_editor.text_editor_plugin.TextEditorPlugin stopping
+plugin envisage.plugins.text_editor.text_editor_plugin.TextEditorPlugin stopped
+plugin envisage.ui.workbench stopping
+plugin envisage.ui.workbench stopped
+plugin envisage.core stopping
+service <2> unregistered
+service <1> unregistered
+plugin envisage.core stopped
+saving preferences to <C:\Users\jrocher\AppData\Roaming\Enthought\practice.envisage.myide\preferences.ini>
+---------- application stopped ----------
