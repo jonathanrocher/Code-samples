@@ -1,0 +1,72 @@
+---------- workbench application ----------
+---------- application starting ----------
+plugin enthought.envisage.core starting
+loading preferences from </Users/jrocher/.enthought/dow.application/preferences.ini>
+extensions to <enthought.envisage.preferences> <[[], ['pkgfile://enthought.envisage.ui.workbench/preferences.ini'], [], [], []]>
+loading preferences from <<open file '/Library/Frameworks/Python.framework/Versions/7.0/lib/python2.7/site-packages/enthought/envisage/ui/workbench/preferences.ini', mode 'rb' at 0x1d36ec28>>
+extensions to <enthought.envisage.class_load_hooks> <[[], [], [], [], []]>
+extensions to <enthought.envisage.categories> <[[], [], [], [], []]>
+extensions to <enthought.envisage.service_offers> <[[], [<enthought.envisage.service_offer.ServiceOffer object at 0x1d375b70>, <enthought.envisage.service_offer.ServiceOffer object at 0x1d3755d0>], [], [<enthought.envisage.service_offer.ServiceOffer object at 0x1d07fe40>], []]>
+service <1> registered enthought.preferences.ui.preferences_manager.PreferencesManager
+service <2> registered enthought.envisage.ui.workbench.workbench.Workbench
+service <3> registered dataset.Dataset
+plugin enthought.envisage.core started
+plugin enthought.envisage.ui.workbench starting
+plugin enthought.envisage.ui.workbench started
+plugin enthought.plugins.python_shell starting
+plugin enthought.plugins.python_shell started
+plugin dow.dow_plugin starting
+plugin dow.dow_plugin started
+plugin dow.dow_ui_plugin starting
+plugin dow.dow_ui_plugin started
+---------- application started ----------
+workbench factory <class 'enthought.envisage.ui.workbench.workbench.Workbench'>
+extensions to <enthought.envisage.ui.workbench.perspectives> <[[], [], [], [], [<class 'dow_ui_plugin.DowPerspective'>]]>
+workbench state location is /Users/jrocher/.enthought/dow.application/pyface/workbench/wx
+window <enthought.envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x14c9e70> opening
+extensions to <enthought.envisage.ui.workbench.service_offers> <[[], [], [], [], []]>
+active perspective changed from <None> to <Perspective(Dow)>
+extensions to <enthought.envisage.ui.workbench.views> <[[], [], [<class 'enthought.plugins.ipython_shell.view.ipython_shell_view.IPythonShellView'>, <class 'enthought.plugins.ipython_shell.view.namespace_view.NamespaceView'>], [], [<bound method DowUIPlugin.create_dow_view of <dow_ui_plugin.DowUIPlugin object at 0x1d363cf0>>]]>
+extensions to <enthought.plugins.ipython_shell.banner> <[[], [], [], [], []]>
+extensions to <enthought.plugins.python_shell.bindings> <[[], [], [{'application': <enthought.envisage.ui.workbench.workbench_application.WorkbenchApplication object at 0x1d363d20>}], [{'djia': <dataset.Dataset object at 0x1d3519c0>}], []]>
+extensions to <enthought.plugins.python_shell.commands> <[[], [], [], [], []]>
+service <4> registered enthought.plugins.python_shell.i_python_shell.IPythonShell
+active view changed from <None> to <<enthought.pyface.workbench.traits_ui_view.TraitsUIView object at 0x1d7e12d0>>
+active part changed from <None> to <<enthought.pyface.workbench.traits_ui_view.TraitsUIView object at 0x1d7e12d0>>
+active view changed from <<enthought.pyface.workbench.traits_ui_view.TraitsUIView object at 0x1d7e12d0>> to <<enthought.plugins.ipython_shell.view.ipython_shell_view.IPythonShellView object at 0x1d7d7090>>
+active part changed from <<enthought.pyface.workbench.traits_ui_view.TraitsUIView object at 0x1d7e12d0>> to <<enthought.plugins.ipython_shell.view.ipython_shell_view.IPythonShellView object at 0x1d7d7090>>
+active view changed from <<enthought.plugins.ipython_shell.view.ipython_shell_view.IPythonShellView object at 0x1d7d7090>> to <None>
+active part changed from <<enthought.plugins.ipython_shell.view.ipython_shell_view.IPythonShellView object at 0x1d7d7090>> to <None>
+extensions to <enthought.envisage.ui.workbench.action_sets> <[[], [<class 'enthought.envisage.ui.workbench.default_action_set.DefaultActionSet'>], [<class 'enthought.plugins.ipython_shell.actions.ipython_shell_actions.IPythonShellActionSet'>], [], []]>
+refreshing view menu
+window <enthought.envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x14c9e70> activated
+window <enthought.envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x14c9e70> opened
+---------- starting GUI event loop ----------
+window <enthought.envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x14c9e70> activated
+window <enthought.envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x14c9e70> activated
+window <enthought.envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x14c9e70> activated
+window <enthought.envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x14c9e70> activated
+window <enthought.envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x14c9e70> activated
+active view changed from <None> to <<enthought.pyface.workbench.traits_ui_view.TraitsUIView object at 0x1d7e12d0>>
+active part changed from <None> to <<enthought.pyface.workbench.traits_ui_view.TraitsUIView object at 0x1d7e12d0>>
+refreshing view menu
+window <enthought.envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x14c9e70> closing
+window <enthought.envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x14c9e70> activated
+disposing traits UI for view [<enthought.pyface.workbench.traits_ui_view.TraitsUIView object at 0x1d7e12d0>]
+window <enthought.envisage.ui.workbench.workbench_window.WorkbenchWindow object at 0x14c9e70> closed
+---------- application stopping ----------
+plugin dow.dow_ui_plugin stopping
+plugin dow.dow_ui_plugin stopped
+plugin dow.dow_plugin stopping
+plugin dow.dow_plugin stopped
+plugin enthought.plugins.python_shell stopping
+plugin enthought.plugins.python_shell stopped
+plugin enthought.envisage.ui.workbench stopping
+plugin enthought.envisage.ui.workbench stopped
+plugin enthought.envisage.core stopping
+service <3> unregistered
+service <2> unregistered
+service <1> unregistered
+plugin enthought.envisage.core stopped
+saving preferences to </Users/jrocher/.enthought/dow.application/preferences.ini>
+---------- application stopped ----------

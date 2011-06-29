@@ -1,0 +1,20 @@
+---------- workbench application ----------
+---------- application starting ----------
+plugin enthought.envisage.core starting
+loading preferences from </Users/jrocher/.enthought/code_editor/preferences.ini>
+extensions to <enthought.envisage.preferences> <[[], ['pkgfile://enthought.envisage.ui.workbench/preferences.ini'], [], ['pkgfile://enthought.logger/plugin/preferences.ini'], [], []]>
+loading preferences from <<open file '/Library/Frameworks/Python.framework/Versions/7.0/lib/python2.7/site-packages/enthought/envisage/ui/workbench/preferences.ini', mode 'rb' at 0x1d297968>>
+loading preferences from <<open file '/Library/Frameworks/Python.framework/Versions/7.0/lib/python2.7/site-packages/enthought/logger/plugin/preferences.ini', mode 'rb' at 0x1d297d30>>
+extensions to <enthought.envisage.class_load_hooks> <[[], [], [], [], [], []]>
+extensions to <enthought.envisage.categories> <[[], [], [], [], [], []]>
+extensions to <enthought.envisage.service_offers> <[[], [<enthought.envisage.service_offer.ServiceOffer object at 0x1d29f990>, <enthought.envisage.service_offer.ServiceOffer object at 0x1d273e10>], [], [], [], []]>
+service <1> registered enthought.preferences.ui.preferences_manager.PreferencesManager
+service <2> registered enthought.envisage.ui.workbench.workbench.Workbench
+plugin enthought.envisage.core started
+plugin enthought.envisage.ui.workbench starting
+plugin enthought.envisage.ui.workbench started
+plugin enthought.plugins.python_shell starting
+plugin enthought.plugins.python_shell started
+plugin enthought.logger starting
+plugin <enthought.plugins.text_editor.text_editor_plugin.TextEditorPlugin object at 0x1d287990> has no Id - using <enthought.plugins.text_editor.text_editor_plugin.TextEditorPlugin>
+missing view for perspective item <enthought.plugins.text_editor_view>
