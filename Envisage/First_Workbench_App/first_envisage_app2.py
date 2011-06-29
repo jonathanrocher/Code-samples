@@ -21,6 +21,7 @@ from enthought.envisage.core_plugin import CorePlugin
 from enthought.envisage.ui.workbench.workbench_plugin import WorkbenchPlugin
 from enthought.plugins.text_editor.text_editor_plugin import TextEditorPlugin
 from enthought.plugins.ipython_shell.ipython_shell_plugin import IPythonShellPlugin
+from enthought.logger.plugin.logger_plugin import LoggerPlugin
 
 # Perspective
 from enthought.pyface.workbench.api import Perspective, PerspectiveItem
@@ -36,14 +37,16 @@ class MyIDEPerspective(Perspective):
     """
     Specify a perspective for the default view of the application
     """
-    name = 'std overview IDE'
+    name = 'Default View'
     enabled = True
     show_editor_area = True
-    contents = [PerspectiveItem(id='enthought.plugins.text_editor_view'),
+    contents = [#PerspectiveItem(id='enthought.plugins.text_editor_view'),
                 PerspectiveItem(id='enthought.plugins.python_shell_view',
                                 position='bottom', relative_to='editor', 
-                                style_hint='vertical'
-                                ),
+                                style_hint='horizontal'),
+                PerspectiveItem(id='enthought.logger.plugin.view.logger_view.LoggerView', 
+                                position='with', relative_to= 
+                                'enthought.plugins.python_shell_view', ),
                 ]
 
 class MyIDEPerspectivePlugin(Plugin):
@@ -57,7 +60,7 @@ class MyIDEPerspectivePlugin(Plugin):
     def _perspectives_default(self):
         return [MyIDEPerspective]
 
-plugins = [ CorePlugin(), WorkbenchPlugin(), 
+plugins = [ CorePlugin(), WorkbenchPlugin(), LoggerPlugin(),
             TextEditorPlugin(), IPythonShellPlugin(), 
             MyIDEPerspectivePlugin()]
 
