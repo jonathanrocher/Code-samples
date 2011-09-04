@@ -26,6 +26,10 @@ def my_class_json_loadhook(in_dict):
     """
     if in_dict["class"].find("my_class") != -1:
         return my_class(a = in_dict["value"])
+    else:
+        err_msg = ("Wrong hook called: my_class loading hook was "
+                   "called for an object of class" % in_dict["class"])
+        raise ValueError(err_msg)
 
 def explore_dumping(x, y, z, var_in_file, filename):
     """ Test dumping the object to a string and a file
