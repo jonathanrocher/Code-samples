@@ -1,3 +1,7 @@
+""" Illustrates the dump and load functions of the json package on standard 
+and custom objects.
+"""
+
 import json
 
 class my_class(object):
