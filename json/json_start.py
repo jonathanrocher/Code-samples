@@ -2,16 +2,27 @@ import json
 
 class my_class(object):
     a = 1
-    
-    #def increase_a(self):
-    #    self.a += 1
-    #    print "New a is %s" % self.a
+
+    def __init__(self, a = None):
+        if a:
+            self.a = a
+
+    def increase_a(self):
+        self.a += 1
+        print "New a is %s" % self.a
 
 def my_class_json_dumphook(z):
     """ Create a hook to be able to serialize my_class type objects
     """
     #return '{"class": "%s", "value": %s}' % (z.__class__, z.a)
     return {"class": str(z.__class__), "value": z.a}
+
+def my_class_json_loadhook(in_dict):
+    """ Create a hook to recreate a my_class type object from the dict given by 
+        my_class_json_dumphook.
+    """
+    if in_dict["class"].find("my_class") != -1:
+        return my_class(a = in_dict["value"])
 
 def explore_dumping(x, y, z, var_in_file, filename):
     """
@@ -39,20 +50,25 @@ def explore_loading(filename):
     
     f = open(filename, "r")
     try:
-        print json.load(f)
+        new_z = json.load(f, object_hook = my_class_json_loadhook)
+        print ("Recreated object is : %s " % new_z)
     except Exception as e:
         print "Error loading the file with exception %s" % e
     f.close()
-    return 
+    return new_z
 
 if __name__ == "__main__":
     x = {"a": 1, "b": 2, "c": 3}
     y = [1,2,3,4,5,6]
     z = my_class()
+    z.increase_a()
 
     filename = "json_start.cfg"
 
     explore_dumping(x, y, z, z, filename)
     
-    explore_loading(filename)
-    
+    new_z = explore_loading(filename)
+
+    print "Are the 2 objects equal?", z == new_z
+    print ("Do they have the same attribute values? %s" 
+           % (z.__dict__ == new_z.__dict__))
