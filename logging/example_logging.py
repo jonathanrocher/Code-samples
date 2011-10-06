@@ -8,23 +8,30 @@ added too.
 """
 
 import logging
+from logging.handlers import RotatingFileHandler
 
 # Create a new logger
 logger = logging.getLogger('simple_example')
 # Set its level to the lowest level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
 logger.setLevel(logging.DEBUG)
 
-# Create file handler which logs even debug messages. 
+# Create file handler which logs even messages. 
 # There is a basic version and a rotating version
-#basic_file_handler = logging.FileHandler('spam.log') # basic version
-rorating_file_handler = logging.handlers.RotatingFileHandler(
-    'spam.log', maxBytes=20, backupCount=5)
+basic_file_handler = logging.FileHandler('spam.log') # basic version
+# Fancy version that creates a new file every 20 bytes and only keep 5 files 
+# at max in addition to the current (overwrites the oldest beyond 5 files)
+rorating_file_handler = RotatingFileHandler(
+    'rotate_spam.log', maxBytes=100, backupCount=5)
+
+# Set the sensitivity of the handler
 rorating_file_handler.setLevel(logging.DEBUG)
+basic_file_handler.setLevel(logging.INFO)
 # create console handler with a higher log level
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.ERROR)
 # create formatter for the layout of messages and add it to the handlers
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s '
+                              '- %(message)s')
 console_handler.setFormatter(formatter)
 rorating_file_handler.setFormatter(formatter)
 # add the handlers to logger
@@ -32,19 +39,17 @@ logger.addHandler(console_handler)
 logger.addHandler(rorating_file_handler)
 
 # Optional: Add handlers to the root logger to catch and show calls to it
-root = logging.getLogger('')
-root.addHandler(file_handler)
+root = logging.getLogger()
+root.addHandler(basic_file_handler)
 root.addHandler(console_handler)
 
 # 'application' code
-logger.debug('debug message')
-logger.info('info message')
-logger.warn('warn message')
-logger.error('error message')
-logger.critical('critical message')
-root.debug("a call to the root logger")
+logger.debug('My debug message')
+logger.info('My info message')
+logger.warn('My warn message')
+logger.error('My error message')
+logger.critical('My critical message')
+root.debug("My call to the root logger")
+root.info("My call to the root logger with info level")
+root.error("My call to the root logger with error level")
 
-
-# Note: Rotating file handler allow to control the size of the log file 
-# and keep a certain number of backup 
-# 
