@@ -2,7 +2,8 @@
 Sean Ross Ross wrote a new branch of Block Context that relies on a few improvements
  - The parser for the code blocks is AST instead of the deprecated compiler module
  - The code blocks are not necessarily assumed to be 1-liners with acyclic tree dependencies
-- The code blocks are written in a new smart_code object that is a lot lighter weight than Block
+ - The code blocks are written in a new smart_code object that is a lot lighter weight than Block.
+To use and combine them, another object called lego was written.
 
  This new branch is called new_block in the ETS - Codetools project
 """
