@@ -6,11 +6,11 @@ of Traits and the super() in its constructor makes sure this
 object possesses the attributes and methods of its parent class.
 """
 
-from enthought.chaco.api import ArrayPlotData, Plot
-from enthought.enable.component_editor import ComponentEditor
+from chaco.api import ArrayPlotData, Plot
+from enable.component_editor import ComponentEditor
 
-from enthought.traits.api import HasTraits, Instance
-from enthought.traits.ui.api import View, Item
+from traits.api import HasTraits, Instance
+from traits.ui.api import View, Item
 
 class MyPlot(HasTraits):
     plot = Instance(Plot)
@@ -33,7 +33,6 @@ class MyPlot(HasTraits):
 
 if __name__ == "__main__":
     from numpy import linspace, sin
-
     x = linspace(-14,14,100)
     y = sin(x) * x**3
     lineplot = MyPlot(x,y)
