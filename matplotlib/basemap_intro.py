@@ -53,9 +53,10 @@ def deg_min_sec2deg(loc = (0,0,0,'N')):
 def load_world_city_db():
     """ Load the world city db from http://www.maxmind.com/download/worldcities/
     """
+    db_filename = "worldcities.txt"
     try:
-        db = np.genfromtxt("worldcities.txt", delimiter = ',', names = True, 
-                            dtype = None)
+        db = np.genfromtxt(db_filename, delimiter = ',', names = True, 
+                            dtype = None, comments = "@")
     except IOError as e:
         raise IOError("File not found: download the file from "
                       "http://www.maxmind.com/download/worldcities/")
@@ -89,13 +90,13 @@ def get_coordinates_city(city = "Austin", state = "", country = "US"):
                 raise ValueError("The number of cities with the criteria was "
     	                         "%s. Cannot proceed." % len(index))
             lon, lat = world_city_db[index]['Longitude'][0], world_city_db[index]['Latitude'][0]
+            # clean up asap because large array
             del world_city_db
             city_db["%s, %s, %s" % (city.lower(), state.lower(), country.lower())] = (lat,lon)
             with open(local_db_file, "w") as f:
                 json.dump(city_db, f)
             
         else:
-            del world_city_db
             raise ValueError("Location not found in any database.")
             
     return lon, lat
@@ -256,7 +257,7 @@ if __name__ == "__main__":
                              resolution = "c", style = 'bw', 
                              rolling_proj = False)
     
-    city = "Dallas"
+    city = "San Antonio"
     state = "TX"
     country = "US"
     lon, lat = get_coordinates_city(city, state, country)
