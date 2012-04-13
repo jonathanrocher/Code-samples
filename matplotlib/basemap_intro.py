@@ -287,7 +287,7 @@ def add_point_data(bmp, x = [], y = [], lats = [], lons = [], style = 'ro',
 
 if __name__ == "__main__":
     b = explore_basemap_proj(projection_type = "conical", region = "usa", 
-                             resolution = "c", style = 'bw', 
+                             resolution = "c", style = 'etopo', 
                              rolling_proj = False)
     
     lons = []
