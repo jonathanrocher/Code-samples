@@ -33,8 +33,12 @@ def deg_min_sec2deg(loc = (0,0,0,'N')):
     """ Convert a lat or lon in (deg, min, sec, orientation) into a decimal 
     degree value.
     """
+    if isinstance(loc, float):
+        # Already converted
+        return loc
+        
     # Deal with a sequence of locations
-    if isinstance(loc[0], tuple):
+    if isinstance(loc[0], tuple) or isinstance(loc[0], list):
         return [deg_min_sec2deg(loc[i]) for i in range(len(loc))]
     
     (degs, mins, secs, orientation) = loc
@@ -62,44 +66,69 @@ def load_world_city_db():
                       "http://www.maxmind.com/download/worldcities/")
     return db
 
-def get_coordinates_city(city, state = "", country = "US"):
+def get_coordinates_cities(cities, states = [""], countries = ["US"]):
     """ Convert a city name into a pair of coordinates. The state is optional 
     and can be given the value of None, or "".
     Everytime a city is looked up in the big db, the result is stored in the 
     local one.
     """
+    # Validation
+    assert(len(cities) == len(countries))
+
+    # Initialization
     global city_db
     local_db_file = "local_city_db.json"
     if os.path.isfile(local_db_file):
         with open(local_db_file, "r") as f:
-            city_db = json.load(f)
-    try:
-        lat, lon = city_db["%s, %s, %s" % (city.lower(), state.lower(), 
-                                           country.lower())]
-    except KeyError as e:
-        # City not in the local dict. Attempt to load the db from the file into 
-        # a structured array
-        print "Attempting to search the db for city:", city, state, country
-        world_city_db = load_world_city_db()
-        if len(world_city_db) > 1:
-            crit = ((world_city_db['City'] == city.lower()) 
-                    & (world_city_db['Country'] == country.lower()) 
+            city_db.update(json.load(f))
+    world_city_db = None
+    big_db_looked_up = False
+    lats = []
+    lons = []
+
+    # Look-ups
+    for i,city in enumerate(cities):
+        country = countries[i]
+        state = states[i]
+        try:
+            # Try in the local db first
+            lat, lon = city_db["%s, %s, %s" % (city.lower(), state.lower(), 
+                                                country.lower())]
+            
+        except KeyError as e:
+            # City not in the local dict. Attempt to load the db from the file into 
+            # a structured array
+            print "Search the large db for", city, state, country
+            if world_city_db is None:
+                # Expensive !!
+                world_city_db = load_world_city_db()
+	    crit = ((world_city_db['City'] == city.lower()) 
+                & (world_city_db['Country'] == country.lower()) 
                     & (world_city_db['Region'] == state.upper()))
             index = np.where(crit)[0]
             if len(index) != 1:
-                raise ValueError("The number of cities with the criteria was "
-    	                         "%s. Cannot proceed." % len(index))
+                raise ValueError("The number of cities with the criteria %s was"
+    	                         " %s. Cannot proceed." 
+    	                         % (city+", "+state+", "+country, len(index)))
             lon, lat = world_city_db[index]['Longitude'][0], world_city_db[index]['Latitude'][0]
-            # clean up asap because large array
-            del world_city_db
+            big_db_looked_up = True
+            
+        lons.append(lon)
+        lats.append(lat)
+
+    # clean up and memoize
+    del world_city_db
+    if big_db_looked_up:
+        for i,city in enumerate(cities):
+            country = countries[i]
+            state = states[i]
+            lat, lon = lats[i], lons[i]
             city_db["%s, %s, %s" % (city.lower(), state.lower(), country.lower())] = (lat,lon)
-            with open(local_db_file, "w") as f:
-                json.dump(city_db, f)
+        with open(local_db_file, "w") as f:
+            json.dump(city_db, f, indent=1)
             
-        else:
-            raise ValueError("Location not found in any database.")
-            
-    return lon, lat
+
+    return lons, lats
 
 
 def get_crnr_coordinates(region = "world"):
@@ -232,21 +261,25 @@ def explore_basemap_proj(region = "world", center = (30, -98),
     return b
 
 
-def add_point_data(bmp, x = [], y = [], lat = [], lon = [], style = 'ro', 
+def add_point_data(bmp, x = [], y = [], lats = [], lons = [], style = 'ro', 
                    text_list = []):
     """ Add point passing their x,y map coordinates or their lat,lon 
     coordinates.
     """
+    # Validation
     assert(len(x)==len(y))
-    assert(len(lat) == len(lon))
-    if lat:
-        x,y = bmp(lon,lat)
+    assert(len(lats) == len(lons))
+    
+    if lats:
+        x,y = bmp(lons,lats)
+        
     x,y = np.array(x), np.array(y)
     assert_(np.all(bmp.xmin <= x))
     assert_(np.all(x <= bmp.xmax))
     assert_(np.all(bmp.ymin <= y))
     assert_(np.all(y <= bmp.ymax))
     bmp.plot(x,y,style)
+    
     if text_list:
         for i,text_el in enumerate(text_list):
             text(x[i]+100000,y[i]+100000,text_el.title())
@@ -257,13 +290,19 @@ if __name__ == "__main__":
                              resolution = "c", style = 'bw', 
                              rolling_proj = False)
     
-    city = "Austin"
-    state = "TX"
-    country = "US"
-    lon, lat = get_coordinates_city(city, state = state, country = country)
-    if isinstance(lon, tuple):
-        lon, lat = deg_min_sec2deg((lon, lat))
-    add_point_data(b, lat = [lat], lon = [lon], style = 'ro', 
-                   text_list = [city])             
+    lons = []
+    lats = []
+    
+    # Collect locations of cities for the points
+    cities = ["Austin", "Washington", "San Francisco"]
+    states = ["TX", "DC", "CA"]
+    countries = ["US", "US", "US"]
+    labels = cities
+    lons, lats = get_coordinates_cities(cities, states = states, countries = countries)
+    # Convert to decimal values if necessary
+    lons, lats = deg_min_sec2deg(lons), deg_min_sec2deg(lats)
+    
+    add_point_data(b, lats = lats, lons = lons, style = 'ro', 
+                   text_list = labels)             
     show()
     
