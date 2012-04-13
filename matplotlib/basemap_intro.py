@@ -173,7 +173,7 @@ def get_conical_boundaries(region = "usa"):
 
 
 def explore_basemap_proj(region = "world", center = (30, -98), 
-                         projection_type = "cyl", rolling_proj = True, 
+                         projection_type = "cyl", rolling_proj = False, 
                          resolution = 'c', style = 'bw', 
                          save_to_fig = False, **kw):
     """ Plot basemaps in various projections and around various point/region. 
@@ -184,8 +184,15 @@ def explore_basemap_proj(region = "world", center = (30, -98),
     =======
     region: string.
         Allowed values are "world", "usa", "europe", 
+    center: tuple.
+        Center of the map. Used for conical and pseudocylindrical projections.
+    resolution: string.
+        resolution of the continent and country boundaries. "c" for "crude", "l"
+        for "low", "i" for "intermediate".
     style: string. 
         Allowed values are 'bw', 'color', 'bluemarble', 'shaderelief', 'etopo'
+    rolling_proj: bool.
+        Show multiple projections of the chosen category.
 
     """
     # Initialization
