@@ -62,7 +62,7 @@ def load_world_city_db():
                       "http://www.maxmind.com/download/worldcities/")
     return db
 
-def get_coordinates_city(city = "Austin", state = "", country = "US"):
+def get_coordinates_city(city, state = "", country = "US"):
     """ Convert a city name into a pair of coordinates. The state is optional 
     and can be given the value of None, or "".
     Everytime a city is looked up in the big db, the result is stored in the 
@@ -257,10 +257,10 @@ if __name__ == "__main__":
                              resolution = "c", style = 'bw', 
                              rolling_proj = False)
     
-    city = "San Antonio"
+    city = "Austin"
     state = "TX"
     country = "US"
-    lon, lat = get_coordinates_city(city, state, country)
+    lon, lat = get_coordinates_city(city, state = state, country = country)
     if isinstance(lon, tuple):
         lon, lat = deg_min_sec2deg((lon, lat))
     add_point_data(b, lat = [lat], lon = [lon], style = 'ro', 
