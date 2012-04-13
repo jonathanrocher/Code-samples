@@ -269,7 +269,7 @@ def explore_basemap_proj(region = "world", center = (30, -98),
 
 
 def add_point_data(bmp, x = [], y = [], lats = [], lons = [], style = 'ro', 
-                   text_list = []):
+                   text_list = [], **kw):
     """ Add point passing their x,y map coordinates or their lat,lon 
     coordinates.
     """
@@ -285,16 +285,44 @@ def add_point_data(bmp, x = [], y = [], lats = [], lons = [], style = 'ro',
     assert_(np.all(x <= bmp.xmax))
     assert_(np.all(bmp.ymin <= y))
     assert_(np.all(y <= bmp.ymax))
-    bmp.plot(x,y,style)
+    bmp.plot(x, y, style, **kw)
+    # Use scatter if need more control over the sizes of the various points. 
+    #bmp.scatter(x,y, c='r', marker='o', s = 100)
     
     if text_list:
         for i,text_el in enumerate(text_list):
-            text(x[i]+100000,y[i]+100000,text_el.title())
+            text(x[i]+100000,y[i]+100000,text_el.title(), fontsize=20)
 
+
+def add_polygon_data(bmp, x = [], y = [], lats = [], lons = [], color = 'r', 
+                     linewidth = 1, **kw):
+    """ Add a polygon passing though all points identified by their x,y map 
+    coordinates or their lat,lon coordinates.
+    """
+    # Validation
+    assert(len(x)==len(y))
+    assert(len(lats) == len(lons))
+    
+    if lats:
+        x,y = bmp(lons,lats)
+    
+    # loop back to the first point to close the polygon.
+    if x[-1] != x[0]:
+        x.append(x[0])
+    if y[-1] != y[0]:
+        y.append(y[0])
+    
+    # Sanity checks
+    x,y = np.array(x), np.array(y)
+    assert_(np.all(bmp.xmin <= x))
+    assert_(np.all(x <= bmp.xmax))
+    assert_(np.all(bmp.ymin <= y))
+    assert_(np.all(y <= bmp.ymax))
+    bmp.plot(x, y, color+"-", linewidth = linewidth, **kw)
 
 if __name__ == "__main__":
-    b = explore_basemap_proj(projection_type = "conical", region = "usa", 
-                             resolution = "c", style = 'etopo', 
+    b = explore_basemap_proj(projection_type = "pseudocyl", region = "usa", 
+                             resolution = "c", style = 'color', 
                              rolling_proj = False)
     
     lons = []
@@ -308,8 +336,11 @@ if __name__ == "__main__":
     lons, lats = get_coordinates_cities(cities, states = states, countries = countries)
     # Convert to decimal values if necessary
     lons, lats = deg_min_sec2deg(lons), deg_min_sec2deg(lats)
-    
+    print lats, lons
+    # Draw the cities
     add_point_data(b, lats = lats, lons = lons, style = 'ro', 
-                   text_list = labels)             
+                   text_list = labels)
+    # Draw the polygon between the cities. 
+    #add_polygon_data(b, lats = lats, lons = lons, color = 'b', linewidth=2)
     show()
     
