@@ -126,7 +126,6 @@ def get_coordinates_cities(cities, states = [""], countries = ["US"]):
             city_db["%s, %s, %s" % (city.lower(), state.lower(), country.lower())] = (lat,lon)
         with open(local_db_file, "w") as f:
             json.dump(city_db, f, indent=1)
-            
 
     return lons, lats
 
@@ -138,7 +137,7 @@ def get_crnr_coordinates(region = "world"):
     if region == "world":
         llcrnrlon=-180
         urcrnrlon=180
-        # Drawing the lats from -80 to 80 because mercator projection blows up 
+        # Drawing the lats from -80 to 80 because mercator projection singular 
         # at 90
         urcrnrlat=80
         llcrnrlat=-80
@@ -188,7 +187,9 @@ def explore_basemap_proj(region = "world", center = (30, -98),
         Center of the map. Used for conical and pseudocylindrical projections.
     resolution: string.
         resolution of the continent and country boundaries. "c" for "crude", "l"
-        for "low", "i" for "intermediate".
+        for "low", "i" for "intermediate". If the basemap_ld egg is installed, 
+        the 'h' and 'f' resolutions can be requested. 
+        WARNING: this is much SLOWER to bring up.
     style: string. 
         Allowed values are 'bw', 'color', 'bluemarble', 'shaderelief', 'etopo'
     rolling_proj: bool.
@@ -285,9 +286,10 @@ def add_point_data(bmp, x = [], y = [], lats = [], lons = [], style = 'ro',
     assert_(np.all(x <= bmp.xmax))
     assert_(np.all(bmp.ymin <= y))
     assert_(np.all(y <= bmp.ymax))
-    bmp.plot(x, y, style, **kw)
-    # Use scatter if need more control over the sizes of the various points. 
-    #bmp.scatter(x,y, c='r', marker='o', s = 100)
+    #bmp.plot(x, y, style, **kw)
+    # Use scatter if need more control over the sizes or color of the each 
+    # point. 
+    bmp.scatter(x,y, c='r', marker='o', s = [200, 400, 600])
     
     if text_list:
         for i,text_el in enumerate(text_list):
@@ -321,8 +323,8 @@ def add_polygon_data(bmp, x = [], y = [], lats = [], lons = [], color = 'r',
     bmp.plot(x, y, color+"-", linewidth = linewidth, **kw)
 
 if __name__ == "__main__":
-    b = explore_basemap_proj(projection_type = "pseudocyl", region = "usa", 
-                             resolution = "c", style = 'color', 
+    b = explore_basemap_proj(projection_type = "conical", region = "usa", 
+                             resolution = "c", style = 'etopo', 
                              rolling_proj = False)
     
     lons = []
@@ -341,6 +343,6 @@ if __name__ == "__main__":
     add_point_data(b, lats = lats, lons = lons, style = 'ro', 
                    text_list = labels)
     # Draw the polygon between the cities. 
-    #add_polygon_data(b, lats = lats, lons = lons, color = 'b', linewidth=2)
+    add_polygon_data(b, lats = lats, lons = lons, color = 'b', linewidth=2)
     show()
     
