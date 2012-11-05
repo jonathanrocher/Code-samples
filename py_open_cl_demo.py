@@ -19,7 +19,7 @@ cl.enqueue_write_buffer(queue, a_dev, a)
 # Just in Time compiler
 prg = cl.Program(ctx, """
     _kernel void twice(_global float *a)
-    {a[get_global_id(0)] *= 2;}
+    { a[ get_global_id (0)] *= 2;}
     """).build()
     
 # Call the twice function    
