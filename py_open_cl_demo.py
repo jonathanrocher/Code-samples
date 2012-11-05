@@ -16,9 +16,10 @@ a_dev = cl.Buffer(ctx, cl.mem_flags.READ_WRITE, size = a.nbytes)
 cl.enqueue_write_buffer(queue, a_dev, a)
 
 # create the pyopencl function a little like weave.inline
-# Just in Time compiler
+# Just in Time compiler. 
+# Notice the way we index into the array a: get_global_id
 prg = cl.Program(ctx, """
-    _kernel void twice(_global float *a)
+    __kernel void twice(_global float *a)
     { a[ get_global_id (0)] *= 2;}
     """).build()
     
