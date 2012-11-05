@@ -28,5 +28,5 @@ prg.twice(queue, a.shape, (1,), a_dev)
 
 # Retrieve result
 result = numpy.empty_like(a)
-cl.enqueue_read_buffer(queue, a.dev, result).wait()
+cl.enqueue_read_buffer(queue, a_dev, result).wait()
 print "Succes?", numpy.all(result-2*a == 0.)
