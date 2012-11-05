@@ -12,7 +12,7 @@ ctx = cl.create_some_context()
 queue = cl.CommandQueue(ctx)
 
 # Allocate a chunk of memory of the size of a and copy the data
-a_dev = cl.Buffer(ctx, cl.mem.flags.READ_WRITE, size = a.bytes)
+a_dev = cl.Buffer(ctx, cl.mem_flags.READ_WRITE, size = a.bytes)
 cl.enqueue_write_buffer(queue, a_dev, a)
 
 # create the pyopencl function a little like weave.inline
