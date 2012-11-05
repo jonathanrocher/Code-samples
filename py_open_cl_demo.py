@@ -19,7 +19,7 @@ cl.enqueue_write_buffer(queue, a_dev, a)
 # Just in Time compiler. 
 # Notice the way we index into the array a: get_global_id
 prg = cl.Program(ctx, """
-    __kernel void twice(_global float *a)
+    __kernel void twice(__global float *a)
     { a[ get_global_id (0)] *= 2;}
     """).build()
     
