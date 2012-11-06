@@ -4,6 +4,6 @@ $ mpiexec -n 4 python hello_world.py
 """
 
 from mpi4py import MPI
-import os
-
-print 'Hello, World from %s!' % os.getpid()
+comm = MPI.COMM_WORLD
+myrank = comm.Get_rank()
+print 'Hello, World from', myrank
