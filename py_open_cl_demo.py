@@ -17,11 +17,15 @@ cl.enqueue_write_buffer(queue, a_dev, a)
 
 # create the pyopencl function a little like weave.inline
 # Just in Time compiler. 
-# Notice the way we index into the array a: get_global_id
+# Notice the way we index into the array a: get_global_id collect the worker's 
+# ID for each worker and use it as index into the array: this is how parallelism 
+# is achieved. 
 prg = cl.Program(ctx, """
     __kernel void twice(__global float *a)
-    { a[ get_global_id (0)] *= 2;}
-    """).build()
+    {
+        unsigned int i = get_global_id(0);
+        a[i] *= 2;
+    }""").build()
     
 # Call the twice function    
 prg.twice(queue, a.shape, (1,), a_dev)
