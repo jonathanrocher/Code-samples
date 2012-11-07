@@ -24,4 +24,4 @@ if __name__ == "__main__":
     filename = "myinfo.pkl"
     save2file(info,filename)
     new_obj = recover_from_file(filename)
-    print "object recovered is", new_obj
+    print "Object recovered is identical?", new_obj.__dict__ == info.__dict__
