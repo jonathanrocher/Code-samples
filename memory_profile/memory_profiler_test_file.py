@@ -15,13 +15,14 @@ def my_func():
     del b
     result["a"] = a
     result["c"] = c
+    
+    obj = MyClass(2,3)
     return result
 
 class MyClass(object):
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.a = linspace(self.y)
 
 if __name__ == '__main__':
     a = my_func()
