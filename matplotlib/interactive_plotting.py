@@ -2,7 +2,8 @@
 option: just redrawing different things on the same figure at a given interval.
 
 Alternatives to this require a timer or an instance of the animation subpackage
-in MPL.
+in MPL. See animation_demo.py for the timer and animation_demo and
+matplotlib.animation and animation_demo*.py for the animation subpackage.
 
 Note: this should be run outside of ipython, to avoid interference.
 """
