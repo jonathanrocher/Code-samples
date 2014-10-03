@@ -7,7 +7,8 @@ from sqlalchemy import *
 
 db = create_engine('sqlite:///tutorial.db')
 
-db.echo = False  # Try changing this to True and see what happens
+# Try changing this to True and see what happens
+db.echo = False
 
 # The metadata is a collection of tables that needs to be bound to the
 # engine
